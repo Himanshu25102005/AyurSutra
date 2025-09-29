@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-const Sidebar = ({ activeSection, setActiveSection, isCollapsed, setIsCollapsed }) => {
+const Sidebar = ({ activeSection, setActiveSection, isCollapsed, setIsCollapsed, onScheduleAppointment }) => {
   const menuItems = [
     {
       id: "dashboard",
@@ -39,6 +39,13 @@ const Sidebar = ({ activeSection, setActiveSection, isCollapsed, setIsCollapsed 
       sanskrit: "संदेश",
       icon: "💬",
       href: "/Dietician/Patient_mnmt/Messages"
+    },
+    {
+      id: "diet-generator",
+      name: "Diet Generator",
+      sanskrit: "आहार निर्माता",
+      icon: "🤖",
+      href: "/Dietician/DietGenerator"
     }
   ];
 
@@ -154,8 +161,7 @@ const Sidebar = ({ activeSection, setActiveSection, isCollapsed, setIsCollapsed 
           </h3>
           {[
             { name: "Add Patient", icon: "➕", action: () => console.log("Add Patient") },
-            { name: "Generate Report", icon: "📋", action: () => console.log("Generate Report") },
-            { name: "Schedule Appointment", icon: "📅", action: () => console.log("Schedule") }
+            { name: "Schedule Appointment", icon: "📅", action: onScheduleAppointment || (() => console.log("Schedule")) }
           ].map((action, index) => (
             <motion.button
               key={action.name}

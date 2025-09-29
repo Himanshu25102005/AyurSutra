@@ -10,6 +10,7 @@ import {
   SearchFilters, 
   PatientProfileModal 
 } from "../../../components/dietician";
+import ScheduleAppointment from "../../../components/dietician/ScheduleAppointment";
 import dataService from "../../../services/dataService";
 
 export default function PatientManagement() {
@@ -23,6 +24,7 @@ export default function PatientManagement() {
   const [filters, setFilters] = useState({});
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const [isScheduleModalOpen, setIsScheduleModalOpen] = useState(false);
 
   // State for patients data to allow refreshing
   const [patients, setPatients] = useState(dataService.getAllPatients());
@@ -161,6 +163,7 @@ export default function PatientManagement() {
           setActiveSection={setActiveSection}
           isCollapsed={isSidebarCollapsed}
           setIsCollapsed={setIsSidebarCollapsed}
+          onScheduleAppointment={() => setIsScheduleModalOpen(true)}
         />
 
         {/* Main Content */}
@@ -580,6 +583,12 @@ export default function PatientManagement() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Schedule Appointment Modal */}
+      <ScheduleAppointment 
+        isOpen={isScheduleModalOpen}
+        onClose={() => setIsScheduleModalOpen(false)}
+      />
     </div>
   );
 }

@@ -1,8 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import dataService from "../../services/dataService";
 
 const PatientCard = ({ patient, onClick, index }) => {
+  const [isClient, setIsClient] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleDeletePatient = (e) => {
+    e.stopPropagation(); // Prevent card click
+    if (showDeleteConfirm) {
+      // Perform delete
+      try {
+        dataService.deletePatient(patient.id);
+        // Dispatch custom event to refresh patient list
+        window.dispatchEvent(new CustomEvent('patientsUpdated'));
+        alert(`Patient ${patient.name} has been deleted successfully.`);
+      } catch (error) {
+        console.error('Error deleting patient:', error);
+        alert('Error deleting patient. Please try again.');
+      }
+      setShowDeleteConfirm(false);
+    } else {
+      // Show confirmation
+      setShowDeleteConfirm(true);
+      // Auto-hide confirmation after 3 seconds
+      setTimeout(() => setShowDeleteConfirm(false), 3000);
+    }
+  };
+
   const getDoshaColor = (dosha) => {
     switch (dosha.toLowerCase()) {
       case 'vata': return 'from-blue-400 to-blue-600';
@@ -33,8 +65,32 @@ const PatientCard = ({ patient, onClick, index }) => {
       }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className="bg-white rounded-2xl p-6 shadow-lg border border-[#4C8C4A]/10 cursor-pointer transition-all duration-300 hover:shadow-2xl group"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="bg-white rounded-2xl p-6 shadow-lg border border-[#4C8C4A]/10 cursor-pointer transition-all duration-300 hover:shadow-2xl group relative"
     >
+      {/* Delete Button - appears on hover */}
+      <AnimatePresence>
+        {isHovered && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.8 }}
+            transition={{ duration: 0.2 }}
+            onClick={handleDeletePatient}
+            className={`absolute top-3 right-3 p-2 rounded-full transition-all duration-200 z-10 ${
+              showDeleteConfirm 
+                ? 'bg-red-500 text-white hover:bg-red-600' 
+                : 'bg-gray-100 text-gray-600 hover:bg-red-100 hover:text-red-600'
+            }`}
+            title={showDeleteConfirm ? `Click again to delete ${patient.name}` : "Delete patient"}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>
+          </motion.button>
+        )}
+      </AnimatePresence>
       {/* Patient Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-4">
@@ -123,6 +179,31 @@ const PatientCard = ({ patient, onClick, index }) => {
           ))}
         </div>
       </div>
+
+      {/* Diet Plan Information */}
+      {isClient && patient.lastDietPlan && (
+        <div className="mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-sm font-semibold text-[#7A5C3A]">Latest Diet Plan</span>
+            <span className="text-xs text-[#7A5C3A]/60">
+              {patient.lastDietPlanDate ? new Date(patient.lastDietPlanDate).toLocaleDateString() : 'Recently updated'}
+            </span>
+          </div>
+          
+          <div className="flex items-center space-x-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full"></div>
+            <span className="text-sm text-[#7A5C3A]">
+              Plan ID: {patient.lastDietPlan}
+            </span>
+            <motion.span
+              whileHover={{ scale: 1.1 }}
+              className="px-2 py-1 bg-green-100 text-green-800 text-xs rounded-full font-medium"
+            >
+              Active
+            </motion.span>
+          </div>
+        </div>
+      )}
 
       {/* Progress Indicators */}
       <div className="space-y-3">

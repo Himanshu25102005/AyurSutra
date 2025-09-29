@@ -6,11 +6,13 @@ import { useState, useEffect } from "react";
 const OverviewTiles = ({ data, onTileClick }) => {
   const [counters, setCounters] = useState({
     totalPatients: data.totalPatients,
+    todayAppointments: data.todayAppointments || 0,
+    upcomingAppointments: data.upcomingAppointments,
+    completedAppointments: data.completedAppointments || 0,
     vataPatients: data.vataPatients,
     pittaPatients: data.pittaPatients,
     kaphaPatients: data.kaphaPatients,
-    highPriority: data.highPriority,
-    upcomingAppointments: data.upcomingAppointments
+    highPriority: data.highPriority
   });
 
   const [isClient, setIsClient] = useState(false);
@@ -30,11 +32,13 @@ const OverviewTiles = ({ data, onTileClick }) => {
         
         setCounters({
           totalPatients: Math.floor(data.totalPatients * progress),
+          todayAppointments: Math.floor((data.todayAppointments || 0) * progress),
+          upcomingAppointments: Math.floor(data.upcomingAppointments * progress),
+          completedAppointments: Math.floor((data.completedAppointments || 0) * progress),
           vataPatients: Math.floor(data.vataPatients * progress),
           pittaPatients: Math.floor(data.pittaPatients * progress),
           kaphaPatients: Math.floor(data.kaphaPatients * progress),
-          highPriority: Math.floor(data.highPriority * progress),
-          upcomingAppointments: Math.floor(data.upcomingAppointments * progress)
+          highPriority: Math.floor(data.highPriority * progress)
         });
 
         if (step >= steps) {
@@ -59,6 +63,36 @@ const OverviewTiles = ({ data, onTileClick }) => {
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-50",
       textColor: "text-blue-700"
+    },
+    {
+      title: "Today's Appointments",
+      sanskrit: "आज की नियुक्ति",
+      value: isClient ? counters.todayAppointments : data.todayAppointments,
+      total: data.todayAppointments,
+      icon: "📅",
+      color: "from-green-400 to-green-600",
+      bgColor: "bg-green-50",
+      textColor: "text-green-700"
+    },
+    {
+      title: "Upcoming Appointments",
+      sanskrit: "आगामी नियुक्ति",
+      value: isClient ? counters.upcomingAppointments : data.upcomingAppointments,
+      total: data.upcomingAppointments,
+      icon: "⏰",
+      color: "from-purple-400 to-purple-600",
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-700"
+    },
+    {
+      title: "Completed Appointments",
+      sanskrit: "पूर्ण नियुक्ति",
+      value: isClient ? counters.completedAppointments : data.completedAppointments,
+      total: data.completedAppointments,
+      icon: "✅",
+      color: "from-emerald-400 to-emerald-600",
+      bgColor: "bg-emerald-50",
+      textColor: "text-emerald-700"
     },
     {
       title: "Vata Patients",
@@ -99,21 +133,11 @@ const OverviewTiles = ({ data, onTileClick }) => {
       color: "from-orange-400 to-orange-600",
       bgColor: "bg-orange-50",
       textColor: "text-orange-700"
-    },
-    {
-      title: "Upcoming Appointments",
-      sanskrit: "आगामी नियुक्ति",
-      value: isClient ? counters.upcomingAppointments : data.upcomingAppointments,
-      total: data.upcomingAppointments,
-      icon: "📅",
-      color: "from-purple-400 to-purple-600",
-      bgColor: "bg-purple-50",
-      textColor: "text-purple-700"
     }
   ];
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-8 gap-6 mb-8">
       {tiles.map((tile, index) => (
         <motion.div
           key={tile.title}

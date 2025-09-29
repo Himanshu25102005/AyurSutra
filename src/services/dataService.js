@@ -6,6 +6,13 @@ class DataService {
     // Initialize with JSON data first
     this.data = patientsData;
     
+    // Ensure all patients have lastDietPlan and lastDietPlanDate properties
+    this.data.patients = this.data.patients.map(patient => ({
+      ...patient,
+      lastDietPlan: patient.lastDietPlan || null,
+      lastDietPlanDate: patient.lastDietPlanDate || null
+    }));
+    
     // Only try to load from localStorage if we're in the browser
     if (typeof window !== 'undefined') {
       const storedData = localStorage.getItem('ayursutra_patients');
@@ -63,7 +70,9 @@ class DataService {
       isOnline: false,
       tags: ['New Patient'],
       dietaryPreference: patientData.cuisines || ['vegetarian'],
-      appointmentHistory: ['new']
+      appointmentHistory: ['new'],
+      lastDietPlan: null,
+      lastDietPlanDate: null
     };
 
     // Add the new patient to the data
@@ -76,6 +85,31 @@ class DataService {
     this.saveToStorage();
     
     return newPatient;
+  }
+
+  deletePatient(patientId) {
+    const index = this.data.patients.findIndex(p => p.id === patientId);
+    if (index !== -1) {
+      const deletedPatient = this.data.patients[index];
+      this.data.patients.splice(index, 1);
+      
+      // Also delete related data
+      if (this.data.dietPlans) {
+        this.data.dietPlans = this.data.dietPlans.filter(plan => plan.patientId !== patientId);
+      }
+      if (this.data.appointments) {
+        this.data.appointments = this.data.appointments.filter(apt => apt.patientId !== patientId);
+      }
+      
+      // Update overview stats
+      this.updateOverviewStats();
+      
+      // Save to localStorage and notify other components
+      this.saveToStorage();
+      
+      return deletedPatient;
+    }
+    return null;
   }
 
   updateOverviewStats() {
@@ -223,12 +257,93 @@ class DataService {
 
   // Overview Stats
   getOverviewStats() {
-    return this.data.overviewStats;
+    const baseStats = this.data.overviewStats;
+    const appointments = this.getAllAppointments();
+    const today = new Date().toISOString().split('T')[0];
+    
+    // Calculate dynamic appointment statistics
+    const todayAppointments = appointments.filter(apt => apt.date === today);
+    const upcomingAppointments = this.getUpcomingAppointments(7);
+    const completedAppointments = appointments.filter(apt => apt.status === 'Completed');
+    const scheduledAppointments = appointments.filter(apt => apt.status === 'Scheduled');
+    
+    return {
+      ...baseStats,
+      todayAppointments: todayAppointments.length,
+      upcomingAppointments: upcomingAppointments.length,
+      completedAppointments: completedAppointments.length,
+      scheduledAppointments: scheduledAppointments.length,
+      totalAppointments: appointments.length
+    };
   }
 
   // Diet Plans
   getAllDietPlans() {
     return this.data.dietPlans;
+  }
+
+  // Appointments
+  getAllAppointments() {
+    return this.data.appointments || [];
+  }
+
+  addAppointment(appointmentData) {
+    if (!this.data.appointments) {
+      this.data.appointments = [];
+    }
+    
+    const newId = `APT${String(this.data.appointments.length + 1).padStart(3, '0')}`;
+    const newAppointment = {
+      id: newId,
+      ...appointmentData,
+      createdAt: new Date().toISOString()
+    };
+    
+    this.data.appointments.push(newAppointment);
+    this.saveToStorage();
+    return newAppointment;
+  }
+
+  updateAppointment(id, updateData) {
+    if (!this.data.appointments) return null;
+    
+    const index = this.data.appointments.findIndex(apt => apt.id === id);
+    if (index !== -1) {
+      this.data.appointments[index] = { ...this.data.appointments[index], ...updateData };
+      this.saveToStorage();
+      return this.data.appointments[index];
+    }
+    return null;
+  }
+
+  deleteAppointment(id) {
+    if (!this.data.appointments) return false;
+    
+    const index = this.data.appointments.findIndex(apt => apt.id === id);
+    if (index !== -1) {
+      this.data.appointments.splice(index, 1);
+      this.saveToStorage();
+      return true;
+    }
+    return false;
+  }
+
+  getAppointmentsByPatientId(patientId) {
+    return (this.data.appointments || []).filter(apt => apt.patientId === patientId);
+  }
+
+  getAppointmentsByDate(date) {
+    return (this.data.appointments || []).filter(apt => apt.date === date);
+  }
+
+  getUpcomingAppointments(days = 7) {
+    const today = new Date();
+    const futureDate = new Date(today.getTime() + (days * 24 * 60 * 60 * 1000));
+    
+    return (this.data.appointments || []).filter(apt => {
+      const aptDate = new Date(apt.date);
+      return aptDate >= today && aptDate <= futureDate;
+    }).sort((a, b) => new Date(a.date + ' ' + a.time) - new Date(b.date + ' ' + b.time));
   }
 
   getDietPlanById(id) {
@@ -336,6 +451,54 @@ class DataService {
       case 'kapha': return 'from-green-400 to-green-600';
       default: return 'from-gray-400 to-gray-600';
     }
+  }
+
+  // Diet Plan Management
+  addDietPlan(planData) {
+    if (!this.data.dietPlans) {
+      this.data.dietPlans = [];
+    }
+    
+    const newId = `DP${String(this.data.dietPlans.length + 1).padStart(3, '0')}`;
+    const newPlan = {
+      id: newId,
+      ...planData,
+      createdAt: new Date().toISOString(),
+      status: 'Active'
+    };
+    
+    this.data.dietPlans.push(newPlan);
+    
+    // Update patient's last diet plan
+    const patientIndex = this.data.patients.findIndex(p => p.id === planData.patientId);
+    if (patientIndex !== -1) {
+      this.data.patients[patientIndex].lastDietPlan = newId;
+      this.data.patients[patientIndex].lastDietPlanDate = new Date().toISOString();
+    }
+    
+    this.saveToStorage();
+    return newPlan;
+  }
+
+  updateDietPlan(id, updateData) {
+    if (!this.data.dietPlans) return null;
+    
+    const index = this.data.dietPlans.findIndex(plan => plan.id === id);
+    if (index !== -1) {
+      this.data.dietPlans[index] = { ...this.data.dietPlans[index], ...updateData };
+      this.saveToStorage();
+      return this.data.dietPlans[index];
+    }
+    return null;
+  }
+
+  getDietPlansByPatientId(patientId) {
+    return (this.data.dietPlans || []).filter(plan => plan.patientId === patientId);
+  }
+
+  getActiveDietPlan(patientId) {
+    const patientPlans = this.getDietPlansByPatientId(patientId);
+    return patientPlans.find(plan => plan.status === 'Active') || null;
   }
 }
 

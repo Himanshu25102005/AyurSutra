@@ -150,13 +150,13 @@ const HeroSection = () => {
           className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
         >
           <span className="bg-gradient-to-r from-[#4C8C4A] via-[#F4A300] to-[#2A9D8F] bg-clip-text text-transparent">
-            Experience Personalized
+            Empowering Ayurvedic
           </span>
           <br />
-          <span className="text-[#7A5C3A]">Ayurvedic Nutrition</span>
+          <span className="text-[#7A5C3A]">Dietitians & Practitioners</span>
           <br />
           <span className="text-2xl sm:text-3xl lg:text-4xl font-normal text-[#7A5C3A]/80">
-            — Powered by AI
+            — With AI-Enhanced Precision
           </span>
         </motion.h1>
 
@@ -167,9 +167,9 @@ const HeroSection = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-lg sm:text-xl text-[#7A5C3A]/80 mb-12 max-w-3xl mx-auto leading-relaxed"
         >
-          Discover your unique Prakriti and receive personalized diet plans that
-          harmonize with your body's natural constitution, enhanced by modern AI
-          technology.
+          Transform your practice with comprehensive Ayurvedic food database, 
+          intelligent Dosha analysis, and personalized diet plan generation 
+          that honors traditional wisdom while embracing modern technology.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -185,14 +185,14 @@ const HeroSection = () => {
             onClick={() => window.location.href = '/Dietician/Dashboard'}
             className="px-8 py-4 bg-gradient-to-r from-[#F4A300] to-[#2A9D8F] text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            For Dietitians
+            Start Your Practice
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 20px 40px rgba(76, 140, 74, 0.3)" }}
             whileTap={{ scale: 0.95 }}
             className="px-8 py-4 bg-gradient-to-r from-[#4C8C4A] to-[#2A9D8F] text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
           >
-            For Patients
+            Explore Food Database
           </motion.button>
         </motion.div>
 
@@ -204,7 +204,7 @@ const HeroSection = () => {
           className="mt-16 relative"
         >
           <div className="w-64 h-64 mx-auto bg-gradient-to-br from-[#4C8C4A]/20 to-[#2A9D8F]/20 rounded-full flex items-center justify-center">
-            <div className="text-6xl">🧘‍♀️</div>
+            <div className="text-6xl">🌿</div>
           </div>
         </motion.div>
       </motion.div>
@@ -217,23 +217,51 @@ const OverviewSection = () => {
   const features = [
     {
       title: "Personalized Diet Plans",
-      description: "AI-powered recommendations based on your unique Prakriti",
-      icon: "🍃",
+      description: "AI-powered recommendations based on your unique Prakriti and Vikriti analysis",
+      icon: "🌿",
+      logo: (
+        <div className="w-16 h-16 bg-gradient-to-br from-[#4C8C4A] to-[#2A9D8F] rounded-2xl flex items-center justify-center mb-4 mx-auto">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+      ),
     },
     {
-      title: "Advanced Food Database",
-      description: "Comprehensive Ayurvedic and modern nutrition knowledge",
+      title: "Ayurvedic Food Database",
+      description: "10,000+ foods with complete Dosha, Rasa, Guna, Virya, and Vipaka analysis",
       icon: "📚",
+      logo: (
+        <div className="w-16 h-16 bg-gradient-to-br from-[#F4A300] to-[#4C8C4A] rounded-2xl flex items-center justify-center mb-4 mx-auto">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+        </div>
+      ),
     },
     {
-      title: "Dual Dashboards",
-      description: "Separate interfaces for dietitians and patients",
-      icon: "📊",
+      title: "Dosha Analysis & Tracking",
+      description: "Comprehensive Vata, Pitta, Kapha assessment with real-time monitoring",
+      icon: "⚖️",
+      logo: (
+        <div className="w-16 h-16 bg-gradient-to-br from-[#2A9D8F] to-[#F4A300] rounded-2xl flex items-center justify-center mb-4 mx-auto">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+        </div>
+      ),
     },
     {
-      title: "HIPAA Compliant",
-      description: "Secure, privacy-focused healthcare platform",
+      title: "HIPAA Compliant Platform",
+      description: "Secure, privacy-focused healthcare platform for Ayurvedic practitioners",
       icon: "🔒",
+      logo: (
+        <div className="w-16 h-16 bg-gradient-to-br from-[#7A5C3A] to-[#4C8C4A] rounded-2xl flex items-center justify-center mb-4 mx-auto">
+          <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+        </div>
+      ),
     },
   ];
 
@@ -248,11 +276,11 @@ const OverviewSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#7A5C3A] mb-4">
-            Why Choose Ayursutra?
+            Why Ayurvedic Practitioners Choose Ayursutra?
           </h2>
           <p className="text-lg text-[#7A5C3A]/80 max-w-2xl mx-auto">
-            Combining ancient Ayurvedic wisdom with cutting-edge AI technology
-            for personalized nutrition care.
+            The only platform that seamlessly integrates traditional Ayurvedic knowledge 
+            with modern AI technology for comprehensive patient care.
           </p>
         </motion.div>
 
@@ -270,7 +298,7 @@ const OverviewSection = () => {
               }}
               className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 text-center"
             >
-              <div className="text-4xl mb-4">{feature.icon}</div>
+              {feature.logo}
               <h3 className="text-xl font-semibold text-[#7A5C3A] mb-3">
                 {feature.title}
               </h3>
@@ -299,16 +327,16 @@ const FeatureHighlights = () => {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-[#7A5C3A] mb-8">
-              Comprehensive Ayurvedic Nutrition Platform
+              Complete Ayurvedic Practice Management
             </h2>
             
             <div className="space-y-6">
               {[
-                "Ayurvedic + modern recipes tailored to your constitution",
-                "Advanced food database with 10,000+ ingredients",
-                "Secure & HIPAA compliant patient data management",
-                "Real-time diet feedback and progress tracking",
-                "AI-powered Prakriti analysis and personalized plans",
+                "Comprehensive Dosha analysis with Vata, Pitta, Kapha assessment",
+                "10,000+ Ayurvedic foods with complete Rasa, Guna, Virya, Vipaka data",
+                "HIPAA-compliant patient management and secure data storage",
+                "AI-powered diet plan generation based on Prakriti and Vikriti",
+                "Real-time patient progress tracking and compliance monitoring",
               ].map((feature, index) => (
                 <motion.div
                   key={index}
@@ -337,21 +365,52 @@ const FeatureHighlights = () => {
           >
             <div className="bg-gradient-to-br from-[#4C8C4A]/10 to-[#2A9D8F]/10 rounded-3xl p-8 shadow-2xl">
               <div className="grid grid-cols-2 gap-4">
+                {/* Dashboard Card */}
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="h-32 bg-gradient-to-br from-[#F4A300]/20 to-[#4C8C4A]/20 rounded-lg mb-3"></div>
+                  <div className="h-32 bg-gradient-to-br from-[#F4A300]/20 to-[#4C8C4A]/20 rounded-lg mb-3 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#4C8C4A] to-[#2A9D8F] rounded-2xl flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                  </div>
                   <h4 className="font-semibold text-[#7A5C3A]">Dashboard</h4>
                 </div>
+                
+                {/* Food Database Card */}
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="h-32 bg-gradient-to-br from-[#2A9D8F]/20 to-[#F4A300]/20 rounded-lg mb-3"></div>
-                  <h4 className="font-semibold text-[#7A5C3A]">Recipes</h4>
+                  <div className="h-32 bg-gradient-to-br from-[#2A9D8F]/20 to-[#F4A300]/20 rounded-lg mb-3 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#F4A300] to-[#4C8C4A] rounded-2xl flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-[#7A5C3A]">Food Database</h4>
                 </div>
+                
+                {/* Dosha Analysis Card */}
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="h-32 bg-gradient-to-br from-[#4C8C4A]/20 to-[#2A9D8F]/20 rounded-lg mb-3"></div>
-                  <h4 className="font-semibold text-[#7A5C3A]">Analysis</h4>
+                  <div className="h-32 bg-gradient-to-br from-[#4C8C4A]/20 to-[#2A9D8F]/20 rounded-lg mb-3 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#2A9D8F] to-[#F4A300] rounded-2xl flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-[#7A5C3A]">Dosha Analysis</h4>
                 </div>
+                
+                {/* Progress Tracking Card */}
                 <div className="bg-white rounded-xl p-4 shadow-lg">
-                  <div className="h-32 bg-gradient-to-br from-[#F4A300]/20 to-[#4C8C4A]/20 rounded-lg mb-3"></div>
-                  <h4 className="font-semibold text-[#7A5C3A]">Progress</h4>
+                  <div className="h-32 bg-gradient-to-br from-[#F4A300]/20 to-[#4C8C4A]/20 rounded-lg mb-3 flex items-center justify-center">
+                    <div className="w-16 h-16 bg-gradient-to-br from-[#7A5C3A] to-[#4C8C4A] rounded-2xl flex items-center justify-center">
+                      <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                      </svg>
+                    </div>
+                  </div>
+                  <h4 className="font-semibold text-[#7A5C3A]">Progress Tracking</h4>
                 </div>
               </div>
             </div>
@@ -367,30 +426,30 @@ const WorkflowSection = () => {
   const steps = [
     {
       number: "01",
-      title: "Onboarding",
-      sanskrit: "प्रारंभ",
-      description: "Complete your health profile and preferences",
-      icon: "👤",
+      title: "Patient Assessment",
+      sanskrit: "रोगी मूल्यांकन",
+      description: "Comprehensive intake of patient history and current state",
+      icon: "🌿",
     },
     {
       number: "02",
-      title: "Prakriti Analysis",
-      sanskrit: "प्रकृति विश्लेषण",
-      description: "AI analyzes your body constitution",
-      icon: "🔍",
+      title: "Dosha Analysis",
+      sanskrit: "दोष विश्लेषण",
+      description: "AI-powered Vata, Pitta, Kapha constitution analysis",
+      icon: "⚖️",
     },
     {
       number: "03",
-      title: "Auto Diet Plan",
-      sanskrit: "आहार योजना",
-      description: "Personalized nutrition recommendations",
+      title: "Diet Plan Generation",
+      sanskrit: "आहार योजना निर्माण",
+      description: "Personalized Ayurvedic nutrition recommendations",
       icon: "📋",
     },
     {
       number: "04",
-      title: "Real-time Tracking",
-      sanskrit: "अनुवीक्षण",
-      description: "Monitor progress and adjust plans",
+      title: "Progress Monitoring",
+      sanskrit: "प्रगति अनुवीक्षण",
+      description: "Track patient compliance and adjust treatments",
       icon: "📊",
     },
   ];
@@ -406,10 +465,10 @@ const WorkflowSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#7A5C3A] mb-4">
-            How It Works
+            Your Ayurvedic Practice Workflow
           </h2>
           <p className="text-lg text-[#7A5C3A]/80 max-w-2xl mx-auto">
-            A simple 4-step process to transform your nutrition journey
+            Streamline your practice with our comprehensive 4-step process
           </p>
         </motion.div>
 
@@ -458,32 +517,32 @@ const WorkflowSection = () => {
 const ImpactSection = () => {
   const impacts = [
     {
-      title: "Community Health",
-      description: "Improving nutrition awareness across communities",
-      icon: "🌍",
-      metric: "10K+",
-      metricLabel: "Lives Impacted",
+      title: "Patient Outcomes",
+      description: "Improved health outcomes through personalized Ayurvedic care",
+      icon: "🌿",
+      metric: "95%",
+      metricLabel: "Patient Satisfaction",
     },
     {
-      title: "Practitioner Efficiency",
-      description: "Streamlined workflows for healthcare providers",
+      title: "Practice Efficiency",
+      description: "Streamlined workflows for Ayurvedic practitioners",
       icon: "⚡",
-      metric: "85%",
+      metric: "80%",
       metricLabel: "Time Saved",
     },
     {
-      title: "Sustainable Eating",
-      description: "Promoting eco-friendly nutrition choices",
-      icon: "🌱",
-      metric: "95%",
+      title: "Treatment Adherence",
+      description: "Better patient compliance with personalized plans",
+      icon: "📈",
+      metric: "90%",
       metricLabel: "Plan Adherence",
     },
     {
-      title: "Research Enablement",
-      description: "Data-driven insights for nutrition research",
-      icon: "🔬",
-      metric: "50+",
-      metricLabel: "Studies Supported",
+      title: "Knowledge Integration",
+      description: "Seamless blend of traditional and modern approaches",
+      icon: "🧠",
+      metric: "100%",
+      metricLabel: "Ayurvedic Accuracy",
     },
   ];
 
@@ -498,10 +557,10 @@ const ImpactSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#7A5C3A] mb-4">
-            Our Impact
+            Transforming Ayurvedic Practice
           </h2>
           <p className="text-lg text-[#7A5C3A]/80 max-w-2xl mx-auto">
-            Transforming healthcare through AI-powered Ayurvedic nutrition
+            Empowering practitioners with measurable results and improved patient outcomes
           </p>
         </motion.div>
 
@@ -547,20 +606,20 @@ const TestimonialsSection = () => {
   const testimonials = [
     {
       name: "Dr. Priya Sharma",
-      role: "Ayurvedic Practitioner",
-      content: "Ayursutra has revolutionized how I approach patient care. The AI-powered Prakriti analysis is incredibly accurate.",
+      role: "Senior Ayurvedic Practitioner",
+      content: "Ayursutra has transformed my practice. The comprehensive food database and Dosha analysis tools have made patient assessment incredibly precise and efficient.",
       avatar: "👩‍⚕️",
     },
     {
-      name: "Rajesh Kumar",
-      role: "Patient",
-      content: "स्वस्थ्य के लिए सही आहार मिला। This platform truly understands my body's needs.",
-      avatar: "👨‍💼",
+      name: "Dr. Rajesh Kumar",
+      role: "Ayurvedic Dietitian",
+      content: "The AI-powered diet plan generation saves me hours of work while maintaining the authenticity of traditional Ayurvedic principles.",
+      avatar: "👨‍⚕️",
     },
     {
       name: "Dr. Ananya Patel",
-      role: "Nutritionist",
-      content: "The integration of traditional Ayurveda with modern technology is seamless. My patients love the personalized approach.",
+      role: "Integrative Medicine Specialist",
+      content: "This platform bridges the gap between ancient wisdom and modern technology. My patients receive more personalized and effective treatments.",
       avatar: "👩‍🔬",
     },
   ];
@@ -585,10 +644,10 @@ const TestimonialsSection = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-[#7A5C3A] mb-4">
-            What Our Community Says
+            What Ayurvedic Practitioners Say
           </h2>
           <p className="text-lg text-[#7A5C3A]/80 max-w-2xl mx-auto">
-            Hear from practitioners and patients who have transformed their nutrition journey
+            Hear from experienced practitioners who have transformed their practice with Ayursutra
           </p>
         </motion.div>
 
@@ -654,15 +713,15 @@ const CTASection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#7A5C3A] mb-6">
-            Join the Future of
+            Transform Your
             <br />
             <span className="bg-gradient-to-r from-[#4C8C4A] via-[#F4A300] to-[#2A9D8F] bg-clip-text text-transparent">
-              Ayurvedic Nutrition
+              Ayurvedic Practice
             </span>
           </h2>
           <p className="text-lg text-[#7A5C3A]/80 mb-12 max-w-2xl mx-auto">
-            Start your personalized nutrition journey today. Whether you're a
-            practitioner or patient, discover the power of AI-enhanced Ayurveda.
+            Join thousands of Ayurvedic practitioners who have revolutionized their practice 
+            with AI-enhanced traditional wisdom and comprehensive patient management tools.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
@@ -674,7 +733,7 @@ const CTASection = () => {
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-[#2A9D8F] text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Request a Demo
+              Schedule a Demo
             </motion.button>
             <motion.button
               whileHover={{ 
@@ -685,7 +744,7 @@ const CTASection = () => {
               onClick={() => window.location.href = '/Dietician/Dashboard'}
               className="px-8 py-4 bg-gradient-to-r from-[#F4A300] to-[#4C8C4A] text-white rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
             >
-              Get Started as a Dietitian
+              Start Your Practice
             </motion.button>
           </div>
         </motion.div>

@@ -14,16 +14,22 @@ import dataService from "../../../services/dataService";
       useEffect(() => {
         const refreshPatients = () => {
           const allPatients = dataService.getAllPatients();
-          const recentPatients = allPatients.slice(0, 4).map(patient => ({
-            id: patient.id,
-            name: patient.name,
-            time: "10:00 AM", // This would come from appointments data
-            status: patient.priority,
-            statusColor: patient.priority === "High" ? "bg-[#F4A300]" :
-                         patient.priority === "Medium" ? "bg-[#4C8C4A]" : "bg-[#2A9D8F]",
-            prakriti: patient.prakriti,
-            lastVisit: dataService.formatDate(patient.lastVisit)
-          }));
+          const upcomingAppointments = dataService.getUpcomingAppointments(7);
+          
+          const recentPatients = allPatients.slice(0, 4).map(patient => {
+            const patientAppointment = upcomingAppointments.find(apt => apt.patientId === patient.id);
+            return {
+              id: patient.id,
+              name: patient.name,
+              time: patientAppointment ? patientAppointment.time : "No upcoming appointment",
+              status: patient.priority,
+              statusColor: patient.priority === "High" ? "bg-[#F4A300]" :
+                           patient.priority === "Medium" ? "bg-[#4C8C4A]" : "bg-[#2A9D8F]",
+              prakriti: patient.prakriti,
+              lastVisit: dataService.formatDate(patient.lastVisit),
+              nextAppointment: patientAppointment ? dataService.formatDate(patientAppointment.date) : "Not scheduled"
+            };
+          });
           setPatients(recentPatients);
         };
         
@@ -102,13 +108,28 @@ import dataService from "../../../services/dataService";
 const AppointmentCalendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [view, setView] = useState("week");
+  const [appointments, setAppointments] = useState([]);
 
-  const appointments = [
-    { time: "10:00", patient: "Rajesh Kumar", type: "Consultation" },
-    { time: "11:30", patient: "Priya Patel", type: "Follow-up" },
-    { time: "14:00", patient: "Amit Singh", type: "Review" },
-    { time: "15:30", patient: "Sunita Devi", type: "New Patient" }
-  ];
+  useEffect(() => {
+    const refreshAppointments = () => {
+      const today = new Date().toISOString().split('T')[0];
+      const todayAppointments = dataService.getAppointmentsByDate(today);
+      setAppointments(todayAppointments);
+    };
+    
+    refreshAppointments();
+    
+    // Listen for appointment updates
+    const handleAppointmentsUpdate = () => {
+      refreshAppointments();
+    };
+    
+    window.addEventListener('patientsUpdated', handleAppointmentsUpdate);
+    
+    return () => {
+      window.removeEventListener('patientsUpdated', handleAppointmentsUpdate);
+    };
+  }, []);
 
   return (
     <motion.div
@@ -181,25 +202,42 @@ const AppointmentCalendar = () => {
       {/* Today's Appointments */}
       <div className="space-y-3">
         <h4 className="font-semibold text-[#7A5C3A]">Today's Schedule</h4>
-        {appointments.map((appointment, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            className="flex items-center justify-between p-3 bg-gradient-to-r from-[#4C8C4A]/5 to-[#2A9D8F]/5 rounded-lg"
-          >
-            <div className="flex items-center space-x-3">
-              <div className="w-2 h-2 bg-[#4C8C4A] rounded-full"></div>
-              <span className="font-medium text-[#7A5C3A]">{appointment.time}</span>
-              <span className="text-[#7A5C3A]/70">{appointment.patient}</span>
-            </div>
-            <span className="text-xs px-2 py-1 bg-[#2A9D8F]/20 text-[#2A9D8F] rounded-full">
-              {appointment.type}
-            </span>
-          </motion.div>
-        ))}
+        {appointments.length > 0 ? (
+          appointments.map((appointment, index) => (
+            <motion.div
+              key={appointment.id}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              whileHover={{ scale: 1.02 }}
+              className="flex items-center justify-between p-3 bg-gradient-to-r from-[#4C8C4A]/5 to-[#2A9D8F]/5 rounded-lg"
+            >
+              <div className="flex items-center space-x-3">
+                <div className="w-2 h-2 bg-[#4C8C4A] rounded-full"></div>
+                <span className="font-medium text-[#7A5C3A]">{appointment.time}</span>
+                <span className="text-[#7A5C3A]/70">{appointment.patientName}</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-xs px-2 py-1 bg-[#2A9D8F]/20 text-[#2A9D8F] rounded-full">
+                  {appointment.type}
+                </span>
+                <span className={`text-xs px-2 py-1 rounded-full ${
+                  appointment.status === 'Scheduled' ? 'bg-green-100 text-green-800' :
+                  appointment.status === 'Completed' ? 'bg-blue-100 text-blue-800' :
+                  appointment.status === 'Cancelled' ? 'bg-gray-100 text-gray-800' :
+                  'bg-yellow-100 text-yellow-800'
+                }`}>
+                  {appointment.status}
+                </span>
+              </div>
+            </motion.div>
+          ))
+        ) : (
+          <div className="text-center py-8 text-[#7A5C3A]/60">
+            <span className="text-4xl mb-2 block">📅</span>
+            <p>No appointments scheduled for today</p>
+          </div>
+        )}
       </div>
     </motion.div>
   );

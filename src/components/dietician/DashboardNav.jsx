@@ -23,16 +23,16 @@ const DashboardNav = () => {
     {
       title: "Patient Care",
       links: [
-        { name: "Dashboard", sanskrit: "मुख्य पट्टिका" },
-        { name: "Patient Management", sanskrit: "रोगी प्रबंधन" },
-        { name: "Diet Generator", sanskrit: "आहार निर्माता" }
+        { name: "Dashboard", sanskrit: "मुख्य पट्टिका", href: "/Dietician/Dashboard" },
+        { name: "Patient Management", sanskrit: "रोगी प्रबंधन", href: "/Dietician/Patient_mnmt" },
+        { name: "Diet Generator", sanskrit: "आहार निर्माता", href: "/Dietician/DietGenerator" }
       ]
     },
     {
       title: "Analytics & Data",
       links: [
-        { name: "Food Database", sanskrit: "खाद्य डेटाबेस" },
-        { name: "Reports", sanskrit: "रिपोर्ट्स" }
+        { name: "Food Database", sanskrit: "खाद्य डेटाबेस", href: "/Dietician/FoodDatabase" },
+        
       ]
     }
   ];
@@ -85,12 +85,9 @@ const DashboardNav = () => {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => {
                     setActiveLink(link.name);
-                    if (link.name === "Patient Management") {
-                      window.location.href = "/Dietician/Patient_mnmt";
-                    } else if (link.name === "Dashboard") {
-                      window.location.href = "/Dietician/Dashboard";
+                    if (link.href && link.href !== "#") {
+                      window.location.href = link.href;
                     }
-                    // Add other navigation links as needed
                   }}
                   className={`px-5 py-2 rounded-lg text-sm font-semibold transition-all duration-300 ${
                     activeLink === link.name
