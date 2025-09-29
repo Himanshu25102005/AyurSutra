@@ -1,0 +1,99 @@
+/* Custom slider styles for Add Patient page */
+
+.slider-purple::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(168, 85, 247, 0.3);
+}
+
+.slider-purple::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #7c3aed);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(168, 85, 247, 0.3);
+}
+
+.slider-orange::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb923c, #ea580c);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(251, 146, 60, 0.3);
+}
+
+.slider-orange::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fb923c, #ea580c);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(251, 146, 60, 0.3);
+}
+
+.slider-teal::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(20, 184, 166, 0.3);
+}
+
+.slider-teal::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(20, 184, 166, 0.3);
+}
+
+.slider-blue::-webkit-slider-thumb {
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+.slider-blue::-moz-range-thumb {
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 6px rgba(59, 130, 246, 0.3);
+}
+
+/* Focus states for better accessibility */
+.slider-purple:focus,
+.slider-orange:focus,
+.slider-teal:focus,
+.slider-blue:focus {
+  outline: 2px solid rgba(76, 140, 74, 0.3);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for all sliders */
+input[type="range"] {
+  transition: all 0.3s ease;
+}
+
+input[type="range"]:hover {
+  transform: scale(1.02);
+}

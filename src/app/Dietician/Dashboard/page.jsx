@@ -4,48 +4,42 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { DashboardNav } from "../../../components/dietician";
+import dataService from "../../../services/dataService";
 
 
-// Patient Overview Panel
-const PatientOverview = () => {
-  const patients = [
-    {
-      id: 1,
-      name: "Rajesh Kumar",
-      time: "10:00 AM",
-      status: "New",
-      statusColor: "bg-[#F4A300]",
-      prakriti: "Pitta",
-      lastVisit: "Today"
-    },
-    {
-      id: 2,
-      name: "Priya Patel",
-      time: "11:30 AM",
-      status: "Active",
-      statusColor: "bg-[#4C8C4A]",
-      prakriti: "Vata",
-      lastVisit: "2 days ago"
-    },
-    {
-      id: 3,
-      name: "Amit Singh",
-      time: "2:00 PM",
-      status: "Needs Review",
-      statusColor: "bg-[#2A9D8F]",
-      prakriti: "Kapha",
-      lastVisit: "1 week ago"
-    },
-    {
-      id: 4,
-      name: "Sunita Devi",
-      time: "3:30 PM",
-      status: "Follow-up Required",
-      statusColor: "bg-[#7A5C3A]",
-      prakriti: "Pitta-Vata",
-      lastVisit: "3 days ago"
-    }
-  ];
+    // Patient Overview Panel
+    const PatientOverview = () => {
+      const [patients, setPatients] = useState([]);
+      
+      useEffect(() => {
+        const refreshPatients = () => {
+          const allPatients = dataService.getAllPatients();
+          const recentPatients = allPatients.slice(0, 4).map(patient => ({
+            id: patient.id,
+            name: patient.name,
+            time: "10:00 AM", // This would come from appointments data
+            status: patient.priority,
+            statusColor: patient.priority === "High" ? "bg-[#F4A300]" :
+                         patient.priority === "Medium" ? "bg-[#4C8C4A]" : "bg-[#2A9D8F]",
+            prakriti: patient.prakriti,
+            lastVisit: dataService.formatDate(patient.lastVisit)
+          }));
+          setPatients(recentPatients);
+        };
+        
+        refreshPatients();
+        
+        // Listen for custom events to refresh when new patients are added
+        const handlePatientsUpdate = () => {
+          refreshPatients();
+        };
+        
+        window.addEventListener('patientsUpdated', handlePatientsUpdate);
+        
+        return () => {
+          window.removeEventListener('patientsUpdated', handlePatientsUpdate);
+        };
+      }, []);
 
   return (
     <motion.div
@@ -342,40 +336,7 @@ const PendingApprovals = () => {
 
 // Real-time Alerts & Notifications
 const NotificationsPanel = () => {
-  const [notifications, setNotifications] = useState([
-    {
-      id: 1,
-      type: "critical",
-      title: "Patient Rajesh reported severe digestive issues",
-      time: "5 min ago",
-      icon: "⚠️",
-      color: "bg-red-500"
-    },
-    {
-      id: 2,
-      type: "info",
-      title: "New questionnaire from Priya Patel",
-      time: "1 hour ago",
-      icon: "📋",
-      color: "bg-blue-500"
-    },
-    {
-      id: 3,
-      type: "warning",
-      title: "Amit Singh missed medication reminder",
-      time: "2 hours ago",
-      icon: "💊",
-      color: "bg-yellow-500"
-    },
-    {
-      id: 4,
-      type: "success",
-      title: "Sunita Devi completed diet plan successfully",
-      time: "3 hours ago",
-      icon: "✅",
-      color: "bg-green-500"
-    }
-  ]);
+  const [notifications, setNotifications] = useState(dataService.getAllNotifications());
 
   const deleteNotification = (id) => {
     setNotifications(notifications.filter(notification => notification.id !== id));

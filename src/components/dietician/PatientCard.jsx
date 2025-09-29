@@ -88,7 +88,12 @@ const PatientCard = ({ patient, onClick, index }) => {
             <>
               <span className="text-[#7A5C3A]/40">•</span>
               <span className="text-xs text-[#7A5C3A]/60">
-                Vikriti: {patient.vikriti}
+                Vikriti: {typeof patient.vikriti === 'object' 
+                  ? Object.entries(patient.vikriti)
+                      .filter(([_, value]) => value > 0)
+                      .map(([dosha, value]) => `${dosha}: ${value}%`)
+                      .join(', ')
+                  : patient.vikriti}
               </span>
             </>
           )}

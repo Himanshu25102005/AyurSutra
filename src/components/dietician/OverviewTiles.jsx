@@ -3,17 +3,21 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 
-const OverviewTiles = ({ data }) => {
+const OverviewTiles = ({ data, onTileClick }) => {
   const [counters, setCounters] = useState({
-    totalPatients: 0,
-    vataPatients: 0,
-    pittaPatients: 0,
-    kaphaPatients: 0,
-    highPriority: 0,
-    upcomingAppointments: 0
+    totalPatients: data.totalPatients,
+    vataPatients: data.vataPatients,
+    pittaPatients: data.pittaPatients,
+    kaphaPatients: data.kaphaPatients,
+    highPriority: data.highPriority,
+    upcomingAppointments: data.upcomingAppointments
   });
 
+  const [isClient, setIsClient] = useState(false);
+
   useEffect(() => {
+    setIsClient(true);
+    
     const animateCounters = () => {
       const duration = 2000;
       const steps = 60;
@@ -49,7 +53,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "Total Patients",
       sanskrit: "कुल रोगी",
-      value: counters.totalPatients,
+      value: isClient ? counters.totalPatients : data.totalPatients,
       total: data.totalPatients,
       icon: "👥",
       color: "from-blue-500 to-blue-600",
@@ -59,7 +63,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "Vata Patients",
       sanskrit: "वात रोगी",
-      value: counters.vataPatients,
+      value: isClient ? counters.vataPatients : data.vataPatients,
       total: data.vataPatients,
       icon: "🌪️",
       color: "from-blue-400 to-blue-600",
@@ -69,7 +73,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "Pitta Patients",
       sanskrit: "पित्त रोगी",
-      value: counters.pittaPatients,
+      value: isClient ? counters.pittaPatients : data.pittaPatients,
       total: data.pittaPatients,
       icon: "🔥",
       color: "from-red-400 to-red-600",
@@ -79,7 +83,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "Kapha Patients",
       sanskrit: "कफ रोगी",
-      value: counters.kaphaPatients,
+      value: isClient ? counters.kaphaPatients : data.kaphaPatients,
       total: data.kaphaPatients,
       icon: "🌊",
       color: "from-green-400 to-green-600",
@@ -89,7 +93,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "High Priority",
       sanskrit: "उच्च प्राथमिकता",
-      value: counters.highPriority,
+      value: isClient ? counters.highPriority : data.highPriority,
       total: data.highPriority,
       icon: "⚠️",
       color: "from-orange-400 to-orange-600",
@@ -99,7 +103,7 @@ const OverviewTiles = ({ data }) => {
     {
       title: "Upcoming Appointments",
       sanskrit: "आगामी नियुक्ति",
-      value: counters.upcomingAppointments,
+      value: isClient ? counters.upcomingAppointments : data.upcomingAppointments,
       total: data.upcomingAppointments,
       icon: "📅",
       color: "from-purple-400 to-purple-600",
@@ -121,6 +125,8 @@ const OverviewTiles = ({ data }) => {
             scale: 1.05,
             boxShadow: "0 20px 40px rgba(76, 140, 74, 0.15)"
           }}
+          whileTap={{ scale: 0.98 }}
+          onClick={() => onTileClick && onTileClick(tile.title.toLowerCase().replace(/\s+/g, ''))}
           className={`${tile.bgColor} rounded-2xl p-6 shadow-lg border border-white/50 relative overflow-hidden group cursor-pointer`}
         >
           {/* Background Pattern */}
@@ -157,8 +163,8 @@ const OverviewTiles = ({ data }) => {
             >
               <div className="flex items-baseline space-x-2">
                 <motion.span
-                  key={tile.value}
-                  initial={{ scale: 1.2 }}
+                  key={`${tile.title}-value`}
+                  initial={isClient ? { scale: 1.2 } : { scale: 1 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 0.3 }}
                   className={`text-3xl font-bold ${tile.textColor}`}
@@ -196,12 +202,17 @@ const OverviewTiles = ({ data }) => {
               <span className={`text-xs font-medium ${tile.textColor}/70`}>
                 {tile.total > 0 ? Math.round((tile.value / tile.total) * 100) : 0}%
               </span>
-              <motion.div
-                whileHover={{ scale: 1.2 }}
-                className="text-xs text-[#7A5C3A]/60 group-hover:text-[#4C8C4A] transition-colors"
-              >
-                View Details →
-              </motion.div>
+            <motion.button
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={(e) => {
+                e.stopPropagation();
+                onTileClick && onTileClick(tile.title.toLowerCase().replace(/\s+/g, ''));
+              }}
+              className="text-xs text-[#7A5C3A]/60 group-hover:text-[#4C8C4A] transition-colors hover:underline"
+            >
+              View Details →
+            </motion.button>
             </div>
           </div>
 

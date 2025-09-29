@@ -1,0 +1,431 @@
+{
+  "patients": [
+    {
+      "id": "P001",
+      "name": "Rajesh Kumar",
+      "age": 45,
+      "gender": "Male",
+      "email": "rajesh.kumar@email.com",
+      "phone": "+91 98765 43210",
+      "address": "123 Main Street, Mumbai, Maharashtra",
+      "prakriti": "Pitta",
+      "vikriti": "Vata",
+      "condition": "Diabetes Type 2",
+      "priority": "High",
+      "lastVisit": "2024-01-20",
+      "nextAppointment": "2024-02-15",
+      "compliance": 85,
+      "weightChange": -2.5,
+      "isOnline": true,
+      "tags": ["High Risk", "Needs Follow-up", "Diet Compliant"],
+      "dietaryPreference": "Vegetarian",
+      "allergies": ["Nuts", "Dairy"],
+      "medications": ["Metformin 500mg", "Ayurvedic herbs"],
+      "notes": "Patient showing good progress with new diet plan. Weight reduced by 2kg this month.",
+      "healthMetrics": {
+        "bloodPressure": "140/90",
+        "bloodSugar": "180 mg/dL",
+        "weight": "75 kg",
+        "height": "170 cm",
+        "bmi": 25.9
+      },
+      "doshaBalance": {
+        "vata": 35,
+        "pitta": 70,
+        "kapha": 25
+      }
+    },
+    {
+      "id": "P002",
+      "name": "Priya Sharma",
+      "age": 32,
+      "gender": "Female",
+      "email": "priya.sharma@email.com",
+      "phone": "+91 98765 43211",
+      "address": "456 Park Avenue, Delhi, NCR",
+      "prakriti": "Vata",
+      "vikriti": "Pitta",
+      "condition": "Digestive Issues",
+      "priority": "Medium",
+      "lastVisit": "2024-01-18",
+      "nextAppointment": "2024-02-10",
+      "compliance": 92,
+      "weightChange": 0.5,
+      "isOnline": false,
+      "tags": ["Regular Patient", "Good Progress"],
+      "dietaryPreference": "Vegan",
+      "allergies": ["Gluten"],
+      "medications": ["Digestive enzymes", "Probiotics"],
+      "notes": "Patient has shown excellent improvement in digestive health with the new diet plan.",
+      "healthMetrics": {
+        "bloodPressure": "120/80",
+        "bloodSugar": "95 mg/dL",
+        "weight": "58 kg",
+        "height": "165 cm",
+        "bmi": 21.3
+      },
+      "doshaBalance": {
+        "vata": 60,
+        "pitta": 45,
+        "kapha": 30
+      }
+    },
+    {
+      "id": "P003",
+      "name": "Amit Patel",
+      "age": 58,
+      "gender": "Male",
+      "email": "amit.patel@email.com",
+      "phone": "+91 98765 43212",
+      "address": "789 Garden Road, Bangalore, Karnataka",
+      "prakriti": "Kapha",
+      "vikriti": "Vata",
+      "condition": "Hypertension",
+      "priority": "High",
+      "lastVisit": "2024-01-15",
+      "nextAppointment": "2024-02-05",
+      "compliance": 78,
+      "weightChange": -1.2,
+      "isOnline": true,
+      "tags": ["New Patient", "Learning Phase"],
+      "dietaryPreference": "Non-Vegetarian",
+      "allergies": ["Shellfish"],
+      "medications": ["Amlodipine 5mg", "Ayurvedic herbs"],
+      "notes": "New patient learning about Ayurvedic lifestyle. Needs more guidance on diet compliance.",
+      "healthMetrics": {
+        "bloodPressure": "160/95",
+        "bloodSugar": "110 mg/dL",
+        "weight": "85 kg",
+        "height": "175 cm",
+        "bmi": 27.8
+      },
+      "doshaBalance": {
+        "vata": 40,
+        "pitta": 30,
+        "kapha": 65
+      }
+    },
+    {
+      "id": "P004",
+      "name": "Sunita Devi",
+      "age": 41,
+      "gender": "Female",
+      "email": "sunita.devi@email.com",
+      "phone": "+91 98765 43213",
+      "address": "321 Temple Street, Chennai, Tamil Nadu",
+      "prakriti": "Pitta",
+      "vikriti": "Kapha",
+      "condition": "PCOS",
+      "priority": "Medium",
+      "lastVisit": "2024-01-12",
+      "nextAppointment": "2024-02-08",
+      "compliance": 88,
+      "weightChange": -3.1,
+      "isOnline": false,
+      "tags": ["Excellent Progress", "Motivated"],
+      "dietaryPreference": "Ayurvedic",
+      "allergies": ["None"],
+      "medications": ["Metformin 1000mg", "Ayurvedic herbs"],
+      "notes": "Patient has made remarkable progress with PCOS management through Ayurvedic diet.",
+      "healthMetrics": {
+        "bloodPressure": "125/82",
+        "bloodSugar": "140 mg/dL",
+        "weight": "68 kg",
+        "height": "162 cm",
+        "bmi": 25.9
+      },
+      "doshaBalance": {
+        "vata": 25,
+        "pitta": 55,
+        "kapha": 50
+      }
+    },
+    {
+      "id": "P005",
+      "name": "Vikram Singh",
+      "age": 35,
+      "gender": "Male",
+      "email": "vikram.singh@email.com",
+      "phone": "+91 98765 43214",
+      "address": "654 Heritage Lane, Jaipur, Rajasthan",
+      "prakriti": "Vata",
+      "vikriti": "Pitta",
+      "condition": "Anxiety",
+      "priority": "Low",
+      "lastVisit": "2024-01-10",
+      "nextAppointment": "2024-02-20",
+      "compliance": 95,
+      "weightChange": 0.8,
+      "isOnline": true,
+      "tags": ["Stable", "Self-Managing"],
+      "dietaryPreference": "Vegetarian",
+      "allergies": ["None"],
+      "medications": ["Ashwagandha", "Brahmi"],
+      "notes": "Patient is managing anxiety well with Ayurvedic herbs and meditation practices.",
+      "healthMetrics": {
+        "bloodPressure": "115/75",
+        "bloodSugar": "90 mg/dL",
+        "weight": "70 kg",
+        "height": "172 cm",
+        "bmi": 23.7
+      },
+      "doshaBalance": {
+        "vata": 70,
+        "pitta": 40,
+        "kapha": 20
+      }
+    },
+    {
+      "id": "P006",
+      "name": "Meera Joshi",
+      "age": 29,
+      "gender": "Female",
+      "email": "meera.joshi@email.com",
+      "phone": "+91 98765 43215",
+      "address": "987 Wellness Way, Pune, Maharashtra",
+      "prakriti": "Kapha",
+      "vikriti": "Vata",
+      "condition": "Weight Management",
+      "priority": "Medium",
+      "lastVisit": "2024-01-08",
+      "nextAppointment": "2024-02-12",
+      "compliance": 82,
+      "weightChange": -4.2,
+      "isOnline": false,
+      "tags": ["Weight Loss", "Active"],
+      "dietaryPreference": "Keto",
+      "allergies": ["Dairy"],
+      "medications": ["Garcinia", "Green tea extract"],
+      "notes": "Patient has achieved significant weight loss through disciplined diet and exercise.",
+      "healthMetrics": {
+        "bloodPressure": "110/70",
+        "bloodSugar": "85 mg/dL",
+        "weight": "62 kg",
+        "height": "160 cm",
+        "bmi": 24.2
+      },
+      "doshaBalance": {
+        "vata": 45,
+        "pitta": 25,
+        "kapha": 60
+      }
+    },
+    {
+      "id": "P007",
+      "name": "Arjun Reddy",
+      "age": 52,
+      "gender": "Male",
+      "email": "arjun.reddy@email.com",
+      "phone": "+91 98765 43216",
+      "address": "147 Tech Park, Hyderabad, Telangana",
+      "prakriti": "Pitta",
+      "vikriti": "Kapha",
+      "condition": "Heart Disease",
+      "priority": "High",
+      "lastVisit": "2024-01-05",
+      "nextAppointment": "2024-01-25",
+      "compliance": 75,
+      "weightChange": -1.8,
+      "isOnline": true,
+      "tags": ["Critical Care", "Medication Dependent"],
+      "dietaryPreference": "Gluten-Free",
+      "allergies": ["Nuts", "Soy"],
+      "medications": ["Atorvastatin", "Metoprolol", "Ayurvedic herbs"],
+      "notes": "Patient with heart condition requires careful monitoring and strict diet compliance.",
+      "healthMetrics": {
+        "bloodPressure": "135/85",
+        "bloodSugar": "120 mg/dL",
+        "weight": "78 kg",
+        "height": "168 cm",
+        "bmi": 27.6
+      },
+      "doshaBalance": {
+        "vata": 30,
+        "pitta": 65,
+        "kapha": 45
+      }
+    },
+    {
+      "id": "P008",
+      "name": "Kavya Nair",
+      "age": 26,
+      "gender": "Female",
+      "email": "kavya.nair@email.com",
+      "phone": "+91 98765 43217",
+      "address": "258 Beach Road, Kochi, Kerala",
+      "prakriti": "Vata",
+      "vikriti": "Pitta",
+      "condition": "Irritable Bowel Syndrome",
+      "priority": "Medium",
+      "lastVisit": "2024-01-22",
+      "nextAppointment": "2024-02-18",
+      "compliance": 90,
+      "weightChange": 0.2,
+      "isOnline": false,
+      "tags": ["Young Patient", "Responsive"],
+      "dietaryPreference": "Vegetarian",
+      "allergies": ["Spicy foods"],
+      "medications": ["Probiotics", "Digestive enzymes"],
+      "notes": "Young patient responding well to Ayurvedic treatment for IBS symptoms.",
+      "healthMetrics": {
+        "bloodPressure": "105/65",
+        "bloodSugar": "88 mg/dL",
+        "weight": "55 kg",
+        "height": "158 cm",
+        "bmi": 22.0
+      },
+      "doshaBalance": {
+        "vata": 75,
+        "pitta": 35,
+        "kapha": 25
+      }
+    }
+  ],
+  "overviewStats": {
+    "totalPatients": 8,
+    "vataPatients": 2,
+    "pittaPatients": 3,
+    "kaphaPatients": 3,
+    "highPriority": 3,
+    "upcomingAppointments": 3,
+    "averageCompliance": 85,
+    "totalWeightLoss": 12.1,
+    "newPatientsThisMonth": 1,
+    "completedAppointments": 5
+  },
+  "dietPlans": [
+    {
+      "id": "DP001",
+      "name": "Pitta Pacifying Diet",
+      "description": "Cooling foods to balance Pitta dosha",
+      "duration": "30 days",
+      "patientId": "P001",
+      "status": "Active",
+      "compliance": 85,
+      "meals": [
+        {
+          "time": "Breakfast",
+          "foods": ["Oatmeal with coconut milk", "Fresh fruits", "Herbal tea"],
+          "notes": "Light and cooling"
+        },
+        {
+          "time": "Lunch",
+          "foods": ["Basmati rice", "Moong dal", "Steamed vegetables"],
+          "notes": "Balanced and nutritious"
+        },
+        {
+          "time": "Dinner",
+          "foods": ["Khichdi", "Cucumber salad", "Mint chutney"],
+          "notes": "Light and easy to digest"
+        }
+      ]
+    },
+    {
+      "id": "DP002",
+      "name": "Vata Balancing Diet",
+      "description": "Warming foods to balance Vata dosha",
+      "duration": "45 days",
+      "patientId": "P002",
+      "status": "Active",
+      "compliance": 92,
+      "meals": [
+        {
+          "time": "Breakfast",
+          "foods": ["Warm porridge", "Ghee", "Ginger tea"],
+          "notes": "Warming and grounding"
+        },
+        {
+          "time": "Lunch",
+          "foods": ["Rice with ghee", "Dal", "Root vegetables"],
+          "notes": "Heavy and nourishing"
+        },
+        {
+          "time": "Dinner",
+          "foods": ["Warm soup", "Steamed vegetables", "Herbal tea"],
+          "notes": "Light but warming"
+        }
+      ]
+    }
+  ],
+  "appointments": [
+    {
+      "id": "APT001",
+      "patientId": "P001",
+      "patientName": "Rajesh Kumar",
+      "date": "2024-02-15",
+      "time": "10:00 AM",
+      "type": "Follow-up",
+      "status": "Scheduled",
+      "notes": "Review diabetes management progress"
+    },
+    {
+      "id": "APT002",
+      "patientId": "P002",
+      "patientName": "Priya Sharma",
+      "date": "2024-02-10",
+      "time": "11:30 AM",
+      "type": "Regular",
+      "status": "Scheduled",
+      "notes": "Digestive health check"
+    },
+    {
+      "id": "APT003",
+      "patientId": "P003",
+      "patientName": "Amit Patel",
+      "date": "2024-02-05",
+      "time": "09:00 AM",
+      "type": "Urgent",
+      "status": "Scheduled",
+      "notes": "Hypertension monitoring"
+    }
+  ],
+  "notifications": [
+    {
+      "id": "N001",
+      "type": "critical",
+      "title": "High Priority Patient Alert",
+      "message": "Rajesh Kumar's blood sugar levels are elevated",
+      "time": "2 hours ago",
+      "read": false,
+      "icon": "⚠️"
+    },
+    {
+      "id": "N002",
+      "type": "warning",
+      "title": "Appointment Reminder",
+      "message": "Priya Sharma has an appointment tomorrow at 11:30 AM",
+      "time": "4 hours ago",
+      "read": false,
+      "icon": "📅"
+    },
+    {
+      "id": "N003",
+      "type": "success",
+      "title": "Diet Compliance Update",
+      "message": "Amit Patel has improved his diet compliance to 78%",
+      "time": "6 hours ago",
+      "read": true,
+      "icon": "✅"
+    }
+  ],
+  "reports": [
+    {
+      "id": "R001",
+      "name": "Monthly Patient Summary",
+      "type": "Summary",
+      "date": "2024-01-31",
+      "patientCount": 156,
+      "averageCompliance": 85,
+      "totalWeightLoss": 45.2
+    },
+    {
+      "id": "R002",
+      "name": "Dosha Analysis Report",
+      "type": "Analysis",
+      "date": "2024-01-30",
+      "vataPatients": 45,
+      "pittaPatients": 67,
+      "kaphaPatients": 44
+    }
+  ]
+}

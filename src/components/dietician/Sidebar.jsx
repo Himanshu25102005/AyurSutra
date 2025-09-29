@@ -24,21 +24,21 @@ const Sidebar = ({ activeSection, setActiveSection, isCollapsed, setIsCollapsed 
       name: "Diet Plans",
       sanskrit: "आहार योजना",
       icon: "🍽️",
-      href: "#"
+      href: "/Dietician/Patient_mnmt/Diet_Plans"
     },
-    {
+    /* {
       id: "reports",
       name: "Reports",
       sanskrit: "रिपोर्ट्स",
       icon: "📈",
       href: "#"
-    },
+    }, */
     {
       id: "messages",
       name: "Messages",
       sanskrit: "संदेश",
       icon: "💬",
-      href: "#"
+      href: "/Dietician/Patient_mnmt/Messages"
     }
   ];
 
