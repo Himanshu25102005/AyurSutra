@@ -9,7 +9,7 @@ A beautiful, modern landing page for Ayursutra, an AI-powered Ayurvedic nutritio
 - **Smooth Animations**: Framer Motion animations for a premium user experience
 - **Sanskrit Integration**: Beautiful Devanagari typography for authentic Ayurvedic feel
 - **Modern UI/UX**: Clean, professional design trusted by both patients and dietitians
-- **SEO Optimized**: Built with Next.js 14 and optimized for search engines
+- **SEO Optimized**: Built with Next.js 14 and optimized for search engines.
 
 ## 🎨 Design System
 
